@@ -1,0 +1,13 @@
+---
+- name: Create file on all the servers and change owner,group owner and permissions
+  hosts: all
+  tasks:
+    - name: File creation
+      file:
+        name: /tmp/file1
+        state: touch
+        mode: 0750
+        owner: Anu
+        group: root
+...
+

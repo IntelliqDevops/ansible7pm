@@ -1,0 +1,9 @@
+---
+- name: Clone a remote github repo into all the servers
+  hosts: all
+  tasks:
+    - name: Download a remote git repo
+      git:
+        repo: https://github.com/IntelliqDevops/maven.git
+        dest: /tmp/mygit
+...
