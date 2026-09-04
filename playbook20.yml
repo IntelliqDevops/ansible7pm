@@ -1,5 +1,5 @@
 ---
-- name: Configure apache2
+- name: Implementing handlers
   hosts: all
   tasks:
     - name: Install apache2
@@ -7,20 +7,24 @@
         name: apache2
         state: present
         update_cache: yes
+      notify: Check apache response
     - name: Edit the index.html file
       copy:
-        content: "--IntelliQIT--"
+        content: "Welcome to my new IntelliQ"
         dest: /var/www/html/index.html
-    - name: Restart aapche2
+      notify: Restart apache2
+  handlers:
+    - name: Restart apache2
       service:
         name: apache2
         state: restarted
-    - name: Check apache response on server1
+    - name: Check apache response
       uri:
-        url: http://172.31.27.73
+        url: "{{item}}"
         status_code: 200
-    - name: Check apache response on server2
-      uri:
-        url: http://172.31.22.147
-        status_code: 200
+      loop:
+        - http://172.31.27.73
+        - http://172.31.22.147
+
 ...
+
