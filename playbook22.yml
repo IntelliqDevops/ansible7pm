@@ -9,9 +9,14 @@
             state: present
             update_cache: yes
       rescue:
-        - name: Install gitn on Redhat servers using yum
+        - name: Install git on Redhat servers using yum
           yum:
             name: git
             state: present
             update_cache: yes
+      always:
+        - name: Print success msg
+          debug:
+            msg: "Git installed successfully"
+
 

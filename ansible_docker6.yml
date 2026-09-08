@@ -1,0 +1,14 @@
+---
+- name: Downloading docker images
+  hosts: all
+  tasks:
+    - name: Pull docker images from docker registry
+      docker_image:
+        name: "{{item}}"
+        source: pull
+      loop:
+        - nginx
+        - tomcat
+        - httpd
+        - ubuntu
+        - ghost
